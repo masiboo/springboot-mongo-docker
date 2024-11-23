@@ -4,3 +4,9 @@ spring:
       database: Book
       host: javatechiemongodb
       port: 27017
+
+
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/Book
