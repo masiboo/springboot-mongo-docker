@@ -37,22 +37,49 @@ docker rm <containerId>
 #### docker-compose.yml
 
 ```yaml
-version: "3"
 services:
-  javatechiemongodb:
-    image: mongo:latest
-    container_name: "javatechiemongodb"
-    ports:
-      - 27017:27017
-  springboot-mongodb:
-    image: springboot-mongodb:1.0
-    container_name: springboot-mongodb
-    ports:
-      - 8080:8080
-    links:
-      - javatechiemongodb
+   javatechiemongodb:
+      image: mongo:latest
+      container_name: "javatechiemongodb"
+      ports:
+         - 27017:27017
+   springboot-mongodb:
+      build:
+         context: .
+         dockerfile: Dockerfile
+      container_name: springboot-mongodb
+      ports:
+         - 8080:8080
+      links:
+         - javatechiemongodb
 ```
-- [x] navigate to resources folder:
+
+```bash
+By postman:
+POST http://localhost:8080/writeBook
+body:
+{
+    "id": 100,
+    "name": "test2",
+    "authorName": "xxxx"
+}
+
+POST http://localhost:8080/writeAllBook
+body:
+[
+{
+    "id": 500,
+    "name": "test",
+    "authorName": "islam"
+},
+{
+    "id": 600,
+    "name": "test",
+    "authorName": "islam"
+}
+]
+
+GET http://localhost:8080/getAllBook
+
 ```
-springboot-mongo-docker/src/main/resources and run docker-compose up
-```
+
