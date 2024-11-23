@@ -1,0 +1,15 @@
+services:
+  javatechiemongodb:
+    image: mongo:latest
+    container_name: "javatechiemongodb"
+    ports:
+      - 27017:27017
+  springboot-mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-mongodb
+    ports:
+      - 8080:8080
+    links:
+      - javatechiemongodb
